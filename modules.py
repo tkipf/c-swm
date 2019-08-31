@@ -4,17 +4,10 @@ import numpy as np
 
 import torch
 from torch import nn
-import torch.nn.functional as F
-
-
-def l2_normalize(tensor):
-    """Normalize batch of vectors to unit length."""
-    norm = tensor.pow(2).sum(dim=1, keepdim=True).sqrt()
-    return tensor / norm
 
 
 class ContrastiveSWM(nn.Module):
-    """Embed pair of observations and predict transition.
+    """Main module for a Contrastively-trained Structured World Model (C-SWM).
 
     Args:
         embedding_dim: Dimensionality of abstract state space.
@@ -43,7 +36,6 @@ class ContrastiveSWM(nn.Module):
         num_channels = input_dims[0]
         width_height = input_dims[1:]
 
-        # 2D envs
         if encoder == 'small':
             self.obj_extractor = EncoderCNNSmall(
                 input_dim=num_channels,
@@ -104,7 +96,7 @@ class ContrastiveSWM(nn.Module):
     def transition_loss(self, state, action, next_state):
         return self.energy(state, action, next_state).mean()
 
-    def embedding_loss(self, obs, action, next_obs):
+    def contrastive_loss(self, obs, action, next_obs):
 
         objs = self.obj_extractor(obs)
         next_objs = self.obj_extractor(next_obs)

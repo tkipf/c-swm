@@ -3,7 +3,6 @@
 import os
 import h5py
 import numpy as np
-import scipy.spatial.distance as dist
 
 import torch
 from torch.utils import data
@@ -78,6 +77,7 @@ def get_colors(cmap='Set1', num_colors=9):
 
     return colors
 
+
 def pairwise_distance_matrix(x, y):
     num_samples = x.size(0)
     dim = x.size(1)
@@ -116,30 +116,13 @@ def to_float(np_array):
     return np.array(np_array, dtype=np.float32)
 
 
-def get_average_pairwise_distance(model, data_loader, device):
-    """Get average pairwise distance between embedded state vectors."""
-    data_batch = data_loader.__iter__().next()
-    data_batch = [tensor.to(device) for tensor in data_batch]
-    obs, _, _ = data_batch
-
-    obs_enc = model.encoder(obs)
-
-    state = obs_enc.detach().cpu().numpy()
-    return dist.pdist(state).mean()
-
-
-def unsorted_segment_sum(data, segment_ids, num_segments):
+def unsorted_segment_sum(tensor, segment_ids, num_segments):
     """Custom PyTorch op to replicate TensorFlow's `unsorted_segment_sum`."""
-    result_shape = (num_segments, data.size(1))
-    result = data.new_full(result_shape, 0)  # Init empty result tensor.
-    segment_ids = segment_ids.unsqueeze(-1).expand(-1, data.size(1))
-    result.scatter_add_(0, segment_ids, data)
+    result_shape = (num_segments, tensor.size(1))
+    result = tensor.new_full(result_shape, 0)  # Init empty result tensor.
+    segment_ids = segment_ids.unsqueeze(-1).expand(-1, tensor.size(1))
+    result.scatter_add_(0, segment_ids, tensor)
     return result
-
-
-def normalize(im):
-    max_val = torch.max(im)
-    return im / max_val
 
 
 class StateTransitionsDataset(data.Dataset):
