@@ -37,7 +37,6 @@ class ContrastiveSWM(nn.Module):
         self.ignore_action = ignore_action
         self.copy_action = copy_action
         
-        self.state = None
         self.pos_loss = 0
         self.neg_loss = 0
 
@@ -113,8 +112,6 @@ class ContrastiveSWM(nn.Module):
         state = self.obj_encoder(objs)
         next_state = self.obj_encoder(next_objs)
 
-        self.state = state
-
         # Sample negative state across episodes at random
         batch_size = state.size(0)
         perm = np.random.permutation(batch_size)
@@ -130,7 +127,7 @@ class ContrastiveSWM(nn.Module):
 
         loss = self.pos_loss + self.neg_loss
 
-        return loss, objs
+        return loss
 
     def forward(self, obs):
         return self.obj_encoder(self.obj_extractor(obs))

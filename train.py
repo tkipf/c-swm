@@ -177,7 +177,7 @@ for epoch in range(1, args.epochs + 1):
                 reduction='sum') / obs.size(0)
             loss += next_loss
         else:
-            loss, state = model.embedding_loss(*data_batch)
+            loss = model.embedding_loss(*data_batch)
 
         loss.backward()
         train_loss += loss.item()
