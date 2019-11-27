@@ -1,5 +1,14 @@
 # Contrastive Learning of Structured World Models
 
+This repository contains the official PyTorch implementation of:
+
+**Contrastive Learning of Structured World Models.**  
+Thomas Kipf, Elise van der Pol, Max Welling.  
+https://arxiv.org/abs/xxxxxxxx
+
+![C-SWM](c-swm.png)
+
+**Abstract:** A structured understanding of our world in terms of objects, relations, and hierarchies is an important component of human cognition. Learning such a structured world model from raw sensory data remains a challenge. As a step towards this goal, we introduce Contrastively-trained Structured World Models (C-SWMs). C-SWMs utilize a contrastive approach for representation learning in environments with compositional structure. We structure each state embedding as a set of object representations and their relations, modeled by a graph neural network. This allows objects to be discovered from raw pixel observations without direct supervision as part of the learning process. We evaluate C-SWMs on compositional environments involving multiple interacting objects that can be manipulated independently by an agent, simple Atari games, and a multi-object physics simulation. Our experiments demonstrate that C-SWMs can overcome limitations of models based on pixel reconstruction and outperform typical representatives of this model class in highly structured environments, while learning interpretable object-based representations.
 
 ## Requirements
 
@@ -71,4 +80,15 @@ python eval.py --dataset data/spaceinvaders_eval.h5 --save-folder checkpoints/sp
 ```bash
 python train.py --dataset data/balls_train.h5 --encoder medium --embedding-dim 4 --num-objects 3 --ignore-action --name balls
 python eval.py --dataset data/balls_eval.h5 --save-folder checkpoints/balls --num-steps 1
+```
+
+### Cite
+If you make use of this code in your own work, please cite our paper:
+```
+@article{kipf2019contrastive,
+  title={Contrastive Learning of Structured World Models}, 
+  author={Kipf, Thomas and van der Pol, Elise and Welling, Max}, 
+  journal={arXiv preprint arXiv:xxxx.xxxxxx}, 
+  year={2019} 
+}
 ```
