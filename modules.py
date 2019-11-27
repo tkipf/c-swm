@@ -75,11 +75,6 @@ class ContrastiveSWM(nn.Module):
         self.width = width_height[0]
         self.height = width_height[1]
 
-    @staticmethod
-    def discriminator(energy):
-        """Energy-based discriminator."""
-        return torch.exp(-energy)
-
     def energy(self, state, action, next_state, no_trans=False):
         """Energy function based on normalized squared L2 norm."""
 
