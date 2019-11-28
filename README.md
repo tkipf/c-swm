@@ -4,7 +4,7 @@ This repository contains the official PyTorch implementation of:
 
 **Contrastive Learning of Structured World Models.**  
 Thomas Kipf, Elise van der Pol, Max Welling.  
-https://arxiv.org/abs/xxxxxxxx
+https://arxiv.org/abs/1911.12247
 
 ![C-SWM](c-swm.png)
 
@@ -88,7 +88,7 @@ If you make use of this code in your own work, please cite our paper:
 @article{kipf2019contrastive,
   title={Contrastive Learning of Structured World Models}, 
   author={Kipf, Thomas and van der Pol, Elise and Welling, Max}, 
-  journal={arXiv preprint arXiv:xxxx.xxxxxx}, 
+  journal={arXiv preprint arXiv:1911.12247}, 
   year={2019} 
 }
 ```
