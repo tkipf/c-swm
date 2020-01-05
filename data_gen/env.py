@@ -7,7 +7,8 @@ experience in a replay buffer.
 # Get env directory
 import sys
 from pathlib import Path
-sys.path.insert(0, str(Path.cwd()))
+if str(Path.cwd()) not in sys.path:
+    sys.path.insert(0, str(Path.cwd()))
 
 import argparse
 
