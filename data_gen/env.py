@@ -8,7 +8,6 @@ experience in a replay buffer.
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path.cwd()))
-print(sys.path)
 
 import argparse
 
