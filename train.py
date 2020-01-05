@@ -81,7 +81,7 @@ exp_counter = 0
 save_folder = '{}/{}/'.format(args.save_folder, exp_name)
 
 if not os.path.exists(save_folder):
-    os.mkdir(save_folder)
+    os.makedirs(save_folder)
 meta_file = os.path.join(save_folder, 'metadata.pkl')
 model_file = os.path.join(save_folder, 'model.pt')
 log_file = os.path.join(save_folder, 'log.txt')

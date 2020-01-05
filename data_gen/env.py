@@ -4,6 +4,12 @@ Running this script directly executes the random agent in environment and stores
 experience in a replay buffer.
 """
 
+# Get env directory
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path.cwd()))
+print(sys.path)
+
 import argparse
 
 # noinspection PyUnresolvedReferences
